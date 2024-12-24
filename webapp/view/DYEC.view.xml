@@ -1,0 +1,180 @@
+<mvc:View controllerName="zdyec.controller.DYEC"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns:f="sap.ui.layout.form" xmlns:T="sap.ui.table"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m" >
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <Panel id="Panel1">
+                <f:SimpleForm id="FirstSimpleForm" layout="ResponsiveGridLayout" columnsL="3" columnsXL="3" columnsM="3" editable="true">
+                    <f:content>
+                        <core:Title id="Coretitle"/>
+                        <Label id="PoDt" design="Bold" text="Posting Date" />
+                        <DatePicker editable="true" id="PostingDate" value="{oPayloadData>/PostingDate}" displayFormat="yyyy-MM-dd" valueFormat="yyyy-MM-dd" placeholder="Please Select Posting Date" width="50%" />
+                        <Label id="SetNum" design="Bold" text="Set Number" />
+                        <Input id="SetNumber" width="50%" value="" submit="onsetnumber" />
+                        <Label  id="a3" design="Bold" text="Order No." />
+                        <Input id="orderno" submit="onrecipenumber" width="50%"  editable="true"/>
+                        <Label id="Recipeno" design="Bold" text="Recipe No" />
+                         <ComboBox items="{modelname>/odataelementlist}"   width="235px"   showSecondaryValues="true"  id="recipe" >
+                            <items>
+                                <core:ListItem id="li7" text="{modelname>SortField}" key="{modelname>SortField}" additionalText="{modelname>OrderID}"  />
+                            </items>
+                        </ComboBox>
+                        <core:Title id="Coretitle1"/>
+                        <Label  id="a2" design="Bold" text="Plant" />
+                        <Input id="Plant" width="30%"  editable="false"/>
+                        <Label  id="a09" design="Bold" text="Dyeing Sort" />
+                        <Input id="dysort" width="30%"  editable="false"/>
+                        <Label  id="a010"  />
+                        <Button text="Add Table" width="150px" id="addtable"  press="CallBackendData"/>
+                        <Button text="Check" width="150px" id="check"  press="Checking"/>
+
+                        <core:Title id="Coretitle3"/>
+                        <T:Table id="table3" rows="{oTableDataModel2>/aTableData2}"  rowHeight="5" >
+                        <T:columns>
+                        <T:Column id="ta2" width="9rem">
+                            <Label id="la2" text="Recipe"/>
+                            <T:template>
+                                <Input editable="false" id="ip2" value="{oTableDataModel2>recipe}"/>
+                            </T:template>
+                        </T:Column>
+                        <T:Column id="ta1" width="9rem">
+                            <Label id="la1" text="Recipe Cost/Mtr."/>
+                            <T:template>
+                                <Input editable="false" id="ip1" value="{oTableDataModel2>recipecostmtr}"/>
+                            </T:template>
+                        </T:Column>
+                    </T:columns>
+                    </T:Table>
+                     <Label  id="a9" design="Bold" text="Total" />
+                     <Input id="tot" width="30%"  editable="false"/>
+                    </f:content>
+                </f:SimpleForm>
+                 
+            </Panel>
+            <Panel id="Panel2">
+                <T:Table id="table2" rows="{oTableDataModel>/aTableData}" selectionBehavior="RowSelector">
+                    <T:extension>
+                        <OverflowToolbar id="oftb" style="Clear">
+                            <ToolbarSpacer id="tbs"/>
+                            <Button id="Button1" icon="sap-icon://save" text=" Save" press="TableDataSave"/>
+                            <Button id="Button2" icon="sap-icon://delete" text=" Delete" press="DeletaTableData"/>
+                        </OverflowToolbar>
+                    </T:extension>
+                      <T:columns>
+                        <T:Column id="tc2" width="9rem">
+                            <Label id="label2" text="Recipe Desc."/>
+                            <T:template>
+                                <Input editable="false" id="input2" value="{oTableDataModel>recipedesc}"/>
+                            </T:template>
+                        </T:Column>
+                        <T:Column id="tc3" width="8rem">
+                            <Label id="label3" text="Chemical"/>
+                            <T:template>
+                                <Input editable="false" id="input3" value="{oTableDataModel>Product}"/>
+                            </T:template>
+                        </T:Column>
+                        <T:Column id="tc4" width="14rem">
+                            <Label id="label4" text="Description"/>
+                            <T:template>
+                                <Input editable="false" id="input4" value="{oTableDataModel>ProductDescription}"/>
+                            </T:template>
+                        </T:Column>
+                        <T:Column id="tc5" width="7rem">
+                            <Label id="label5" text="Req Qty (kg)"/>
+                            <T:template>
+                                <Input editable="false" id="input5" value="{oTableDataModel>ResvnItmRequiredQtyInBaseUnit}"/>
+                            </T:template>
+                        </T:Column>
+                         <T:Column id="tc15" width="7rem">
+                            <Label id="label15" text="STD GPL"/>
+                            <T:template>
+                                <Input editable="false" id="input15" value="{oTableDataModel>stdgpl}"/>
+                            </T:template>
+                        </T:Column>
+                        <T:Column id="tc6" width="4rem">
+                            <Label id="label6" text="Uom"/>
+                            <T:template>
+                                <Input editable="false" id="input6" value="{oTableDataModel>BaseUnit}"/>
+                            </T:template>
+                        </T:Column>
+                        <T:Column id="tc7" width="7rem">
+                            <Label id="label7" text="Already Cons."/>
+                            <T:template>
+                                <Input editable="false" id="input7" value="{oTableDataModel>ResvnItmWithdrawnQtyInBaseUnit}"/>
+                            </T:template>
+                        </T:Column>
+                        <T:Column id="tc8" width="6rem">
+                            <Label id="label8" text="Curr Stk Qty (KG)"/>
+                            <T:template>
+                                <Input editable="false" id="input8" value="{oTableDataModel>StockQty}"/>
+                            </T:template>
+                        </T:Column>
+                        <T:Column id="tc83" width="8rem">
+                            <Label id="label83" text="Last Use GPL"/>
+                            <T:template>
+                                <Input editable="false" id="input83" value="{oTableDataModel>LastUsedQty}"/>
+                            </T:template>
+                        </T:Column>
+                        <T:Column id="tc81" width="6rem">
+                            <Label id="label81" text="Prod. GPL"/>
+                            <T:template>
+                                <Input editable="true" id="input81" value="{oTableDataModel>ProdGPL}"/>
+                            </T:template>
+                        </T:Column>
+
+                        <T:Column id="tc82" width="6rem">
+                            <Label id="label82" text="Feed (Ltr)"/>
+                            <T:template>
+                                <Input editable="true" submit="CalculateTotalConsQuantity" id="input82" value="{oTableDataModel>Feed_LTR}"/>
+                            </T:template>
+                        </T:Column>
+                        <T:Column id="tc9" width="8rem">
+                            <Label id="label9" text="Tot. Cons. Qty."/>
+                            <T:template>
+                                <Input editable="true" id="input9" submit="consqtyvarFunction" value="{oTableDataModel>ConsQty}"/>
+                            </T:template>
+                        </T:Column>
+                        
+                        <T:Column id="tc10" width="7rem">
+                            <Label id="label10" text="Cons. Batch"/>
+                            <T:template>
+                                <Input editable="true" id="input10" submit="CallDataAccordingConsBatch" value="{oTableDataModel>Batch}"/>
+                            </T:template>
+                        </T:Column>
+                        <T:Column id="tc11" width="8rem">
+                            <Label id="label11" text="Cons. Loc."/>
+                            <T:template>
+                                <Input editable="false" id="input11" value="{oTableDataModel>StorageLocation}"/>
+                            </T:template>
+                        </T:Column>
+                        <T:Column id="tc111" width="8rem">
+                            <Label id="label111" text="Bath Adjustment"/>
+                            <T:template>
+                                <Input editable="true" id="input111" value="{oTableDataModel>bathadjustment}"/>
+                            </T:template>
+                        </T:Column>
+                        <T:Column id="tc121" width="8rem">
+                            <Label id="label121" text="Cost Per Mtr"/>
+                            <T:template>
+                                <Input editable="false" id="input121" value="{oTableDataModel>costpermtr}"/>
+                            </T:template>
+                        </T:Column>
+                         <T:Column id="tc12" width="8rem">
+                            <Label id="label12" text="Price"/>
+                            <T:template>
+                                <Input editable="false" id="input12" value="{oTableDataModel>costing}"/>
+                            </T:template>
+                        </T:Column>
+                        <T:Column id="tc13" width="8rem">
+                            <Label id="label13" text="Length"/>
+                            <T:template>
+                                <Input editable="false" id="input13" value="{oTableDataModel>setlength}"/>
+                            </T:template>
+                        </T:Column>
+                    </T:columns>
+                </T:Table>
+            </Panel>
+        </content>
+    </Page>
+</mvc:View>
